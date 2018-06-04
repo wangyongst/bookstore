@@ -247,12 +247,12 @@ public class TwoServiceImpl implements TwoService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false)
     public Result returnAgree(TwoParameter twoParameter) {
         Result result = new Result();
-        if (twoParameter.getBookstoreid() == null || twoParameter.getBookstoreid() == 0 || twoParameter.getOwnerid() == null || twoParameter.getOwnerid() == 0 || twoParameter.getUserid() == null || twoParameter.getUserid() == 0) {
+        if (twoParameter.getBookstoreid() == null || twoParameter.getBookstoreid() == 0 || twoParameter.getUserid() == null || twoParameter.getUserid() == 0) {
             result.setMessage("必须的参数不能为空!");
             return result;
         }
         Bookstore bookstore = bookstoreRepository.findOne(twoParameter.getBookstoreid());
-        if (bookstore == null || bookstore.getStatus() != 2 || bookstore.getOwner().getId() != twoParameter.getOwnerid()) {
+        if (bookstore == null || bookstore.getStatus() != 2) {
             result.setMessage("未找到这本书,或这本书不可还！");
             return result;
         }
